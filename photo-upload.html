@@ -1,0 +1,32 @@
+<div class="workAreaContainer">
+	<button class="btn btn-default btnWindowHistoryBack" ng-click='goBack()'><span><i class="fa fa-chevron-left"></i> Back</span></button>
+
+    <div class="imageBox"  ng-cloak>
+	    <div class="thumbBox" ng-show='!cameraMode'  ng-class="{ 'isSeen cursorMove' : photoLoadingProcess }"></div> 
+	    <img class="thumbBox fullsize" ng-show='!cameraMode'  ng-class="{ 'isSeen' : !photoLoadingProcess }" ng-src="{{photo.link}}">
+        <div class="spinner" ng-show='!cameraMode'  style="display: none"></div>
+        <p class="userIconChoosePhoto"  ng-show='!cameraMode'   ng-class="{ 'isSeen' : !isFilled(photo.link) && !photoLoadingProcess}" >
+	       <i class="fa fa-user"></i>
+	    </p>
+        <div id="cameraView" style=" width:300px; height:300px;"></div>
+    </div>
+    
+    <div class="containerCrop" ng-class="{ 'isSeen' : photoLoadingProcess }">
+    	<div id="iconMinus"><i class="fa fa-search-minus"></i></div>
+    	<div id="iconPlus"><i class="fa fa-search-plus"></i></div>
+    	<div id="slider"></div>
+    	<button type="button" class="btn btn-default btnCancelPhotoUpload" ng-click='cropCancel()'>Cancel</button>
+    	<button type="button" class="btn btn-default btnApprovePhotoUpload" ng-click='cropImage()'>Crop</button>
+    </div>
+    
+    <div class="containerUpload" ng-class="{ 'isSeen' : !photoLoadingProcess }">
+	    <button ng-show='!cameraMode' type="button" class="btn btn-default btnApprovePhotoUpload" ng-click='pushButton("photoFromFile")'>Load Photo</button>
+		<button ng-show='!cameraMode' type="button" class="btn btn-default btnApprovePhotoUpload" ng-click='openCamera()'>Take Picture</button>
+		<button ng-show='cameraMode' type="button" class="btn btn-default btnCancelPhotoUpload" ng-click='closeCamera()'>Cancel</button>
+		<button ng-show='cameraMode' type="button" class="btn btn-default btnApprovePhotoUpload" ng-click='takePhoto()'>Make Shot</button>  
+    </div>
+        
+    <div style="visibility: hidden;">
+        <input id="photoFromFile" type="file" file-model="photoFile" value="upload" accept="image/*"  my-on-change="loadPhotoFromFile"/>
+    </div>
+</div>
